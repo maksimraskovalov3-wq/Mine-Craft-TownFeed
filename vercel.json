@@ -2,7 +2,7 @@
   "version": 2,
   "framework": null,
   "installCommand": "pnpm install --no-frozen-lockfile",
-  "buildCommand": "PORT=3000 BASE_PATH=/ pnpm --filter @workspace/townsend run build",
+  "buildCommand": "pnpm --filter @workspace/townsend run build",
   "outputDirectory": "artifacts/townsend/dist/public",
   "rewrites": [
     {
