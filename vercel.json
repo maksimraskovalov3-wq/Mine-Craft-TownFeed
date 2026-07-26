@@ -2,7 +2,7 @@
   "version": 2,
   "framework": null,
   "installCommand": "pnpm install",
-  "buildCommand": "PORT=3000 BASE_PATH=/ pnpm --filter @workspace/api-spec run codegen && pnpm --filter @workspace/townsend run build",
+  "buildCommand": "PORT=3000 BASE_PATH=/ pnpm --filter @workspace/townsend run build",
   "outputDirectory": "artifacts/townsend/dist/public",
   "builds": [
     {
