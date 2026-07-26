@@ -1,10 +1,10 @@
 import express from "express";
 import cors from "cors";
+import pinoHttpModule from "pino-http";
 import router from "./routes/index.js";
 import { logger } from "./lib/logger.js";
 
-// @ts-expect-error pino-http has broken ESM types with export=
-const pinoHttp = (await import("pino-http")).default;
+const pinoHttp = pinoHttpModule as any;
 
 const app = express();
 
