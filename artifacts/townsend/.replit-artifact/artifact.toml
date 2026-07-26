@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "TownFeed"
+version = "1.0.0"
+id = "artifacts/townsend"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23412
+
+[services.development]
+run = "pnpm --filter @workspace/townsend run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/townsend", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/townsend/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23412"
+BASE_PATH = "/"

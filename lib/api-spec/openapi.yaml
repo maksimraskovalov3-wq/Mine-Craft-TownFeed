@@ -3,13 +3,21 @@ info:
   # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: TownFeed - Minecraft city catalog API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: cities
+    description: City catalog operations
+  - name: comments
+    description: Comment operations
+  - name: news
+    description: News operations
+  - name: admin
+    description: Admin operations
 paths:
   /healthz:
     get:
@@ -24,6 +32,208 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /cities:
+    get:
+      operationId: listCities
+      tags: [cities]
+      summary: List all cities
+      responses:
+        "200":
+          description: List of cities
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/City"
+    post:
+      operationId: createCity
+      tags: [cities]
+      summary: Create a new city (admin only)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CityInput"
+      responses:
+        "201":
+          description: Created city
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/City"
+        "401":
+          description: Unauthorized
+
+  /cities/stats:
+    get:
+      operationId: getCityStats
+      tags: [cities]
+      summary: Get aggregate city statistics
+      responses:
+        "200":
+          description: City statistics
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CityStats"
+
+  /cities/{id}:
+    get:
+      operationId: getCity
+      tags: [cities]
+      summary: Get a city by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: City detail
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/City"
+        "404":
+          description: Not found
+    delete:
+      operationId: deleteCity
+      tags: [cities]
+      summary: Delete a city (admin only)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Deleted
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not found
+
+  /cities/{id}/comments:
+    get:
+      operationId: listComments
+      tags: [comments]
+      summary: Get comments for a city
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of comments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Comment"
+    post:
+      operationId: createComment
+      tags: [comments]
+      summary: Post a comment on a city
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CommentInput"
+      responses:
+        "201":
+          description: Created comment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Comment"
+
+  /news:
+    get:
+      operationId: listNews
+      tags: [news]
+      summary: List all news items
+      responses:
+        "200":
+          description: List of news
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NewsItem"
+    post:
+      operationId: createNews
+      tags: [news]
+      summary: Create a news item (admin only)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewsInput"
+      responses:
+        "201":
+          description: Created news item
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewsItem"
+        "401":
+          description: Unauthorized
+
+  /news/{id}:
+    delete:
+      operationId: deleteNews
+      tags: [news]
+      summary: Delete a news item (admin only)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Deleted
+        "401":
+          description: Unauthorized
+
+  /admin/login:
+    post:
+      operationId: adminLogin
+      tags: [admin]
+      summary: Admin login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminCredentials"
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminLoginResult"
+        "401":
+          description: Invalid credentials
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +244,178 @@ components:
       required:
         - status
 
+    City:
+      type: object
+      required:
+        - id
+        - name
+        - description
+        - treasury
+        - reputation
+        - founder
+        - population
+        - coordinates_x
+        - coordinates_z
+        - last_updated
+        - spawn_command
+        - photos
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        treasury:
+          type: string
+        reputation:
+          type: string
+        founder:
+          type: string
+        population:
+          type: string
+        coordinates_x:
+          type: string
+        coordinates_z:
+          type: string
+        last_updated:
+          type: string
+        map_link:
+          type: ["string", "null"]
+        spawn_command:
+          type: string
+        photos:
+          type: array
+          items:
+            type: string
+        created_at:
+          type: ["string", "null"]
+
+    CityInput:
+      type: object
+      required:
+        - name
+        - description
+        - treasury
+        - reputation
+        - founder
+        - population
+        - coordinates_x
+        - coordinates_z
+        - spawn_command
+        - photos
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        treasury:
+          type: string
+        reputation:
+          type: string
+        founder:
+          type: string
+        population:
+          type: string
+        coordinates_x:
+          type: string
+        coordinates_z:
+          type: string
+        map_link:
+          type: string
+        spawn_command:
+          type: string
+        photos:
+          type: array
+          items:
+            type: string
+
+    CityStats:
+      type: object
+      required:
+        - total_cities
+        - total_comments
+        - total_news
+      properties:
+        total_cities:
+          type: integer
+        total_comments:
+          type: integer
+        total_news:
+          type: integer
+
+    Comment:
+      type: object
+      required:
+        - id
+        - city_id
+        - nickname
+        - content
+        - created_at
+      properties:
+        id:
+          type: string
+        city_id:
+          type: string
+        nickname:
+          type: string
+        avatar_url:
+          type: ["string", "null"]
+        content:
+          type: string
+        created_at:
+          type: string
+
+    CommentInput:
+      type: object
+      required:
+        - nickname
+        - content
+      properties:
+        nickname:
+          type: string
+        content:
+          type: string
+        avatar_url:
+          type: string
+
+    NewsItem:
+      type: object
+      required:
+        - id
+        - content
+        - created_at
+      properties:
+        id:
+          type: string
+        content:
+          type: string
+        created_at:
+          type: string
+
+    NewsInput:
+      type: object
+      required:
+        - content
+      properties:
+        content:
+          type: string
+
+    AdminCredentials:
+      type: object
+      required:
+        - password
+      properties:
+        password:
+          type: string
+
+    AdminLoginResult:
+      type: object
+      required:
+        - success
+        - token
+      properties:
+        success:
+          type: boolean
+        token:
+          type: string
