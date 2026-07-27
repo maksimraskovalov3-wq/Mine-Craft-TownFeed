@@ -271,7 +271,7 @@ function CitiesManager({ queryClient, toast }: any) {
 
               <div className="space-y-3 pt-2">
                 <div className="flex justify-between items-center">
-                  <FormLabel>Photos (URLs)</FormLabel>
+                  <span className="text-sm font-medium text-foreground">Photos (URLs)</span>
                   <Button type="button" variant="outline" size="sm" onClick={() => appendPhoto({ value: '' })} className="h-7 text-xs">
                     <Plus className="w-3 h-3 mr-1" /> Add Photo
                   </Button>
