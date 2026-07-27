@@ -1,0 +1,33 @@
+14:04:32.637 Running build in Washington, D.C., USA (East) – iad1
+14:04:32.638 Build machine configuration: 2 cores, 8 GB
+14:04:32.771 Cloning github.com/maksimraskovalov3-wq/Mine-Craft-TownFeed (Branch: main, Commit: 6f7a148)
+14:04:32.772 Previous build caches not available.
+14:04:32.979 Cloning completed: 207.000ms
+14:04:33.673 Running "vercel build"
+14:04:33.688 Vercel CLI 56.5.0
+14:04:34.352 Warning: Detected "engines": { "node": ">=20" } in your `package.json` that will automatically upgrade when a new major Node.js Version is released. Learn More: https://vercel.link/node-version
+14:04:34.358 Running "install" command: `npm install -g pnpm@10.26.1 && pnpm install`...
+14:04:36.211 
+14:04:36.211 added 1 package in 2s
+14:04:36.212 
+14:04:36.212 1 package is looking for funding
+14:04:36.212   run `npm fund` for details
+14:04:36.659 Scope: all 9 workspace projects
+14:04:36.712  WARN  GET https://registry.npmjs.org/@hookform%2Fresolvers error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+14:04:36.713  WARN  GET https://registry.npmjs.org/@radix-ui%2Freact-accordion error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+14:04:36.714  WARN  GET https://registry.npmjs.org/@radix-ui%2Freact-alert-dialog error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+14:04:36.715  WARN  GET https://registry.npmjs.org/@radix-ui%2Freact-aspect-ratio error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+14:04:36.715  WARN  GET https://registry.npmjs.org/@radix-ui%2Freact-avatar error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+14:04:36.716  WARN  GET https://registry.npmjs.org/@radix-ui%2Freact-checkbox error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+14:04:36.716  WARN  GET https://registry.npmjs.org/@radix-ui%2Freact-collapsible error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+14:04:36.716  WARN  GET https://registry.npmjs.org/@radix-ui%2Freact-context-menu error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+14:04:36.717  WARN  GET https://registry.npmjs.org/@radix-ui%2Freact-dialog error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+14:04:36.717  WARN  GET https://registry.npmjs.org/@radix-ui%2Freact-dropdown-menu error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+14:04:36.717  WARN  GET https://registry.npmjs.org/@radix-ui%2Freact-hover-card error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+14:04:36.718  WARN  GET https://registry.npmjs.org/@radix-ui%2Freact-label error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+14:04:36.718  WARN  GET https://registry.npmjs.org/@radix-ui%2Freact-menubar error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+14:04:36.719  WARN  GET https://registry.npmjs.org/@radix-ui%2Freact-navigation-menu error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+14:04:36.719  WARN  GET https://registry.npmjs.org/@radix-ui%2Freact-popover error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+14:04:36.719  WARN  GET https://registry.npmjs.org/@radix-ui%2Freact-progress error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+14:04:36.719  ERR_PNPM_SPEC_NOT_SUPPORTED_BY_ANY_RESOLVER  @tanstack/react-query@catalog: isn't supported by any available resolver.
+14:04:36.729 Error: Command "npm install -g pnpm@10.26.1 && pnpm install" exited with 1
